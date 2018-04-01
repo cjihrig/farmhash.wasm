@@ -1,0 +1,38 @@
+{
+  "name": "farmhash.wasm",
+  "version": "0.1.0",
+  "description": "Google FarmHash in WebAssembly",
+  "author": "Colin J. Ihrig <cjihrig@gmail.com> (http://www.cjihrig.com/)",
+  "main": "lib/index.js",
+  "homepage": "https://github.com/cjihrig/farmhash.wasm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjihrig/farmhash.wasm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cjihrig/farmhash.wasm/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "compile": "docker run --rm -v $(pwd):/src trzeci/emscripten emcc -O3 -s WASM=1 -s BINARYEN_ASYNC_COMPILATION=0 --bind src/farmhash.cc src/bindings.cc -o lib/farmhash.js",
+    "lint": "belly-button -f -I 'node_modules/**' -I lib/farmhash.js",
+    "pretest": "npm run lint",
+    "test": "lab -v -a code -t 100 --coverage-exclude lib/farmhash.js"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "devDependencies": {
+    "belly-button": "4.x.x",
+    "code": "5.x.x",
+    "lab": "15.x.x"
+  },
+  "keywords": [
+    "wasm",
+    "WebAssembly",
+    "farmhash",
+    "hash",
+    "hashing",
+    "hash function"
+  ]
+}
